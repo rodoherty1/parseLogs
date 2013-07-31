@@ -1,0 +1,20 @@
+2013-07-26 14:58:24,037 INFO org.apache.hadoop.util.NativeCodeLoader: Loaded the native-hadoop library
+2013-07-26 14:58:24,127 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/com <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/com
+2013-07-26 14:58:24,134 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/job.jar <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/job.jar
+2013-07-26 14:58:24,136 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/.job.jar.crc <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/.job.jar.crc
+2013-07-26 14:58:24,137 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/org <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/org
+2013-07-26 14:58:24,138 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/dk <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/dk
+2013-07-26 14:58:24,139 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/pigContext <- /hdfs/disk6/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000008_0/work/pigContext
+2013-07-26 14:58:24,652 INFO org.apache.hadoop.util.ProcessTree: setsid exited with exit code 0
+2013-07-26 14:58:24,657 INFO org.apache.hadoop.mapred.Task:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@326edcf6
+2013-07-26 14:58:25,151 INFO org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigRecordReader: Current split being processed hdfs://10.198.10.10:8020/data/2013-07-13T20_33_39.082_AMS-HADOOP3_Thread-2.tsv:1610612736+536870912
+2013-07-26 14:58:25,160 INFO org.apache.hadoop.mapred.MapTask: io.sort.mb = 200
+2013-07-26 14:58:25,294 INFO org.apache.hadoop.mapred.MapTask: data buffer = 125829120/157286400
+2013-07-26 14:58:25,294 INFO org.apache.hadoop.mapred.MapTask: record buffer = 2621440/3276800
+2013-07-26 14:58:25,360 INFO org.apache.pig.data.SchemaTupleBackend: Key [pig.schematuple] was not set... will not generate code.
+2013-07-26 14:58:25,492 INFO org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Map: Aliases being processed per job phase (AliasName[line,offset]): M: raw[12,6],raw[-1,-1],raw_SMS[24,10],outbound_data[26,16],outbound_grouping[36,20],inbound_data[44,15],inbound_grouping[54,19] C:  R: outbound_counts[37,18],out_allowed[39,18],out_blocked[38,18],inbound_counts[55,17],in_allowed[57,17],in_blocked[56,17]
+2013-07-26 14:58:59,869 INFO org.apache.hadoop.mapred.MapTask: Starting flush of map output
+2013-07-26 14:59:00,939 INFO org.apache.hadoop.mapred.MapTask: Finished spill 0
+2013-07-26 14:59:00,942 INFO org.apache.hadoop.mapred.Task: Task:attempt_201307261207_0221_m_000008_0 is done. And is in the process of commiting
+2013-07-26 14:59:02,147 INFO org.apache.hadoop.mapred.Task: Task 'attempt_201307261207_0221_m_000008_0' done.
+2013-07-26 14:59:02,151 INFO org.apache.hadoop.mapred.TaskLogsTruncater: Initializing logs' truncater with mapRetainSize=-1 and reduceRetainSize=-1

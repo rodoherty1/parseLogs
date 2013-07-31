@@ -1,0 +1,23 @@
+2013-07-26 15:08:20,682 INFO org.apache.hadoop.util.NativeCodeLoader: Loaded the native-hadoop library
+2013-07-26 15:08:20,781 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/com <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/com
+2013-07-26 15:08:20,788 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/job.jar <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/job.jar
+2013-07-26 15:08:20,790 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/.job.jar.crc <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/.job.jar.crc
+2013-07-26 15:08:20,791 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/org <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/org
+2013-07-26 15:08:20,792 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/dk <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/dk
+2013-07-26 15:08:20,794 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/pigContext <- /hdfs/disk1/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_m_000082_0/work/pigContext
+2013-07-26 15:08:21,327 INFO org.apache.hadoop.util.ProcessTree: setsid exited with exit code 0
+2013-07-26 15:08:21,332 INFO org.apache.hadoop.mapred.Task:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@59b5a0b
+2013-07-26 15:08:21,757 INFO org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigRecordReader: Current split being processed hdfs://10.198.10.10:8020/data/2013-07-13T23_34_47.763_AMS-HADOOP3_Thread-2.tsv:1073741824+536870912
+2013-07-26 15:08:21,768 INFO org.apache.hadoop.mapred.MapTask: io.sort.mb = 200
+2013-07-26 15:08:21,884 INFO org.apache.hadoop.mapred.MapTask: data buffer = 125829120/157286400
+2013-07-26 15:08:21,884 INFO org.apache.hadoop.mapred.MapTask: record buffer = 2621440/3276800
+2013-07-26 15:08:22,023 INFO org.apache.pig.data.SchemaTupleBackend: Key [pig.schematuple] was not set... will not generate code.
+2013-07-26 15:08:22,231 INFO org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Map: Aliases being processed per job phase (AliasName[line,offset]): M: raw[12,6],raw[-1,-1],raw_SMS[24,10],outbound_data[26,16],outbound_grouping[36,20],inbound_data[44,15],inbound_grouping[54,19] C:  R: outbound_counts[37,18],out_allowed[39,18],out_blocked[38,18],inbound_counts[55,17],in_allowed[57,17],in_blocked[56,17]
+2013-07-26 15:08:56,202 ERROR com.adaptivemobile.analytics.rm.processing.pig.EventLoader: IOException reading PB Event null
+2013-07-26 15:08:56,205 INFO org.apache.hadoop.mapred.MapTask: Starting flush of map output
+2013-07-26 15:08:56,936 INFO org.apache.hadoop.mapred.MapTask: Finished spill 0
+2013-07-26 15:08:56,937 INFO org.apache.hadoop.mapred.Task: Task:attempt_201307261207_0221_m_000082_0 is done. And is in the process of commiting
+2013-07-26 15:08:59,154 INFO org.apache.hadoop.mapred.Task: Task 'attempt_201307261207_0221_m_000082_0' done.
+2013-07-26 15:08:59,156 INFO org.apache.hadoop.mapred.TaskLogsTruncater: Initializing logs' truncater with mapRetainSize=-1 and reduceRetainSize=-1
+2013-07-26 15:08:59,201 INFO org.apache.hadoop.io.nativeio.NativeIO: Initialized cache for UID to User mapping with a cache timeout of 14400 seconds.
+2013-07-26 15:08:59,201 INFO org.apache.hadoop.io.nativeio.NativeIO: Got UserName adaptive for UID 500 from the native implementation

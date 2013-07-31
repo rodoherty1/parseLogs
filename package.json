@@ -1,0 +1,19 @@
+{
+	"name": "parseLogs",
+	"description": "Log parsing tool",
+	"author": "Rob O'Doherty <rodoherty1@gmail.com>",
+	"dependencies": {
+		"async" : "0.2.x",
+		"underscore" : "1.x.x",
+		"grep1" : "0.0.x",
+		"jasmine-node" : "1.x.x",
+		"jquery" : "1.x.x",
+		"optimist" : "0.x.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rodoherty1/parseLogs"
+	},
+	"readmeFilename": "README.md"
+	
+}

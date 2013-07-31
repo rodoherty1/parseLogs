@@ -1,0 +1,139 @@
+2013-07-26 15:12:14,704 INFO org.apache.hadoop.util.NativeCodeLoader: Loaded the native-hadoop library
+2013-07-26 15:12:14,853 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/com <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/com
+2013-07-26 15:12:14,879 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/job.jar <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/job.jar
+2013-07-26 15:12:14,892 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/.job.jar.crc <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/.job.jar.crc
+2013-07-26 15:12:14,905 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/org <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/org
+2013-07-26 15:12:14,907 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/dk <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/dk
+2013-07-26 15:12:14,922 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/pigContext <- /hdfs/disk2/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000006_0/work/pigContext
+2013-07-26 15:12:15,797 INFO org.apache.hadoop.util.ProcessTree: setsid exited with exit code 0
+2013-07-26 15:12:15,802 INFO org.apache.hadoop.mapred.Task:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@7389db56
+2013-07-26 15:12:16,157 INFO org.apache.hadoop.mapred.ReduceTask: ShuffleRamManager: MemoryLimit=1503238528, MaxSingleShuffleLimit=375809632
+2013-07-26 15:12:16,187 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Thread started: Thread for merging in memory files
+2013-07-26 15:12:16,187 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Thread started: Thread for merging on-disk files
+2013-07-26 15:12:16,188 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Thread waiting: Thread for merging on-disk files
+2013-07-26 15:12:16,190 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Need another 99 map output(s) where 0 is already in progress
+2013-07-26 15:12:16,190 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Thread started: Thread for polling Map Completion Events
+2013-07-26 15:12:16,190 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 0 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:16,217 INFO org.apache.hadoop.mapred.ReduceTask: Ignoring obsolete output of KILLED map-task: 'attempt_201307261207_0221_m_000096_1'
+2013-07-26 15:12:16,217 INFO org.apache.hadoop.mapred.ReduceTask: Ignoring obsolete output of KILLED map-task: 'attempt_201307261207_0221_m_000097_1'
+2013-07-26 15:12:21,191 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 2 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:21,910 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 2 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:21,971 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and55 dup hosts)
+2013-07-26 15:12:21,979 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,048 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,100 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,143 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,252 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,789 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,832 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:22,945 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and39 dup hosts)
+2013-07-26 15:12:23,122 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and47 dup hosts)
+2013-07-26 15:12:23,181 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and47 dup hosts)
+2013-07-26 15:12:23,224 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and47 dup hosts)
+2013-07-26 15:12:23,788 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and36 dup hosts)
+2013-07-26 15:12:23,844 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and36 dup hosts)
+2013-07-26 15:12:23,957 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and36 dup hosts)
+2013-07-26 15:12:24,169 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and44 dup hosts)
+2013-07-26 15:12:24,196 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and35 dup hosts)
+2013-07-26 15:12:24,333 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and43 dup hosts)
+2013-07-26 15:12:24,442 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and43 dup hosts)
+2013-07-26 15:12:24,651 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and43 dup hosts)
+2013-07-26 15:12:24,753 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and43 dup hosts)
+2013-07-26 15:12:24,848 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and31 dup hosts)
+2013-07-26 15:12:25,271 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and42 dup hosts)
+2013-07-26 15:12:25,373 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:26,852 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:26,919 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,001 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,070 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,134 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,253 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,316 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,886 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:27,949 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:28,049 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and30 dup hosts)
+2013-07-26 15:12:28,362 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and31 dup hosts)
+2013-07-26 15:12:28,566 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and31 dup hosts)
+2013-07-26 15:12:28,609 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and31 dup hosts)
+2013-07-26 15:12:28,972 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and27 dup hosts)
+2013-07-26 15:12:29,045 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and27 dup hosts)
+2013-07-26 15:12:29,329 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and29 dup hosts)
+2013-07-26 15:12:29,615 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and29 dup hosts)
+2013-07-26 15:12:29,957 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and25 dup hosts)
+2013-07-26 15:12:30,026 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and25 dup hosts)
+2013-07-26 15:12:30,116 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and25 dup hosts)
+2013-07-26 15:12:30,486 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and26 dup hosts)
+2013-07-26 15:12:30,500 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and26 dup hosts)
+2013-07-26 15:12:30,980 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and23 dup hosts)
+2013-07-26 15:12:31,027 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and23 dup hosts)
+2013-07-26 15:12:31,542 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and24 dup hosts)
+2013-07-26 15:12:31,595 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and24 dup hosts)
+2013-07-26 15:12:31,625 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and24 dup hosts)
+2013-07-26 15:12:32,032 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and20 dup hosts)
+2013-07-26 15:12:32,465 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and23 dup hosts)
+2013-07-26 15:12:32,724 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and23 dup hosts)
+2013-07-26 15:12:32,812 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and23 dup hosts)
+2013-07-26 15:12:33,059 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and17 dup hosts)
+2013-07-26 15:12:33,073 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and17 dup hosts)
+2013-07-26 15:12:33,116 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and17 dup hosts)
+2013-07-26 15:12:33,456 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and20 dup hosts)
+2013-07-26 15:12:33,518 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and20 dup hosts)
+2013-07-26 15:12:33,595 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and20 dup hosts)
+2013-07-26 15:12:33,723 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and20 dup hosts)
+2013-07-26 15:12:34,059 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and13 dup hosts)
+2013-07-26 15:12:34,101 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and13 dup hosts)
+2013-07-26 15:12:34,168 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and13 dup hosts)
+2013-07-26 15:12:34,463 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and17 dup hosts)
+2013-07-26 15:12:34,702 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and17 dup hosts)
+2013-07-26 15:12:35,114 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:35,193 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:35,244 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:35,519 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and14 dup hosts)
+2013-07-26 15:12:35,570 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and14 dup hosts)
+2013-07-26 15:12:35,649 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and14 dup hosts)
+2013-07-26 15:12:35,747 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and14 dup hosts)
+2013-07-26 15:12:36,287 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and7 dup hosts)
+2013-07-26 15:12:36,320 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and7 dup hosts)
+2013-07-26 15:12:36,623 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and12 dup hosts)
+2013-07-26 15:12:37,113 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and6 dup hosts)
+2013-07-26 15:12:37,561 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:37,667 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:37,690 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:37,701 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:37,877 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and11 dup hosts)
+2013-07-26 15:12:38,108 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and1 dup hosts)
+2013-07-26 15:12:38,160 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and1 dup hosts)
+2013-07-26 15:12:38,186 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and1 dup hosts)
+2013-07-26 15:12:38,545 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and8 dup hosts)
+2013-07-26 15:12:39,122 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:39,135 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:39,150 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:39,167 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:39,183 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:40,149 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:40,184 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:40,219 INFO org.apache.hadoop.mapred.ReduceTask: attempt_201307261207_0221_r_000006_0 Scheduled 1 outputs (0 slow hosts and0 dup hosts)
+2013-07-26 15:12:40,283 INFO org.apache.hadoop.mapred.ReduceTask: GetMapEventsThread exiting
+2013-07-26 15:12:40,283 INFO org.apache.hadoop.mapred.ReduceTask: getMapsEventsThread joined.
+2013-07-26 15:12:40,284 INFO org.apache.hadoop.mapred.ReduceTask: Closed ram manager
+2013-07-26 15:12:40,284 INFO org.apache.hadoop.mapred.ReduceTask: Interleaved on-disk merge complete: 0 files left.
+2013-07-26 15:12:40,285 INFO org.apache.hadoop.mapred.ReduceTask: In-memory merge complete: 99 files left.
+2013-07-26 15:12:40,303 INFO org.apache.hadoop.mapred.Merger: Merging 99 sorted segments
+2013-07-26 15:12:40,304 INFO org.apache.hadoop.mapred.Merger: Down to the last merge-pass, with 99 segments left of total size: 440815440 bytes
+2013-07-26 15:12:48,528 INFO org.apache.hadoop.mapred.ReduceTask: Merged 99 segments, 440815440 bytes to disk to satisfy reduce memory limit
+2013-07-26 15:12:48,528 INFO org.apache.hadoop.mapred.ReduceTask: Merging 1 files, 440815248 bytes from disk
+2013-07-26 15:12:48,529 INFO org.apache.hadoop.mapred.ReduceTask: Merging 0 segments, 0 bytes from memory into reduce
+2013-07-26 15:12:48,529 INFO org.apache.hadoop.mapred.Merger: Merging 1 sorted segments
+2013-07-26 15:12:48,530 INFO org.apache.hadoop.mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 440815244 bytes
+2013-07-26 15:12:48,571 INFO org.apache.pig.data.SchemaTupleBackend: Key [pig.schematuple] was not set... will not generate code.
+2013-07-26 15:12:48,690 INFO org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigMapReduce$Reduce: Aliases being processed per job phase (AliasName[line,offset]): M: raw[12,6],raw[-1,-1],raw_SMS[24,10],outbound_data[26,16],outbound_grouping[36,20],inbound_data[44,15],inbound_grouping[54,19] C:  R: outbound_counts[37,18],out_allowed[39,18],out_blocked[38,18],inbound_counts[55,17],in_allowed[57,17],in_blocked[56,17]
+2013-07-26 15:13:33,444 INFO org.apache.pig.impl.util.SpillableMemoryManager: first memory handler call - Collection threshold init = 1056309248(1031552K) used = 1109618888(1083612K) committed = 1851195392(1807808K) max = 2097152000(2048000K)
+2013-07-26 15:13:40,583 INFO org.apache.pig.impl.util.SpillableMemoryManager: Spilled an estimate of 1513724622 bytes from 1 objects. init = 1056309248(1031552K) used = 1109618888(1083612K) committed = 1851195392(1807808K) max = 2097152000(2048000K)
+2013-07-26 15:14:11,256 INFO org.apache.hadoop.mapred.Task: Task:attempt_201307261207_0221_r_000006_0 is done. And is in the process of commiting
+2013-07-26 15:14:14,370 INFO org.apache.hadoop.mapred.Task: Task attempt_201307261207_0221_r_000006_0 is allowed to commit now
+2013-07-26 15:14:14,380 INFO org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: Saved output of task 'attempt_201307261207_0221_r_000006_0' to hdfs://10.198.10.10:8020/tmp/temp-1551628162/tmp1884079696
+2013-07-26 15:14:14,392 INFO org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: Saved output of task 'attempt_201307261207_0221_r_000006_0' to hdfs://10.198.10.10:8020/tmp/temp-1551628162/tmp714526144
+2013-07-26 15:14:15,210 INFO org.apache.hadoop.mapred.Task: Task 'attempt_201307261207_0221_r_000006_0' done.
+2013-07-26 15:14:15,221 INFO org.apache.hadoop.mapred.TaskLogsTruncater: Initializing logs' truncater with mapRetainSize=-1 and reduceRetainSize=-1
+2013-07-26 15:14:15,256 INFO org.apache.hadoop.io.nativeio.NativeIO: Initialized cache for UID to User mapping with a cache timeout of 14400 seconds.
+2013-07-26 15:14:15,257 INFO org.apache.hadoop.io.nativeio.NativeIO: Got UserName adaptive for UID 500 from the native implementation

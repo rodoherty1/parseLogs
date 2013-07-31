@@ -1,0 +1,15 @@
+2013-07-26 15:14:24,256 INFO org.apache.hadoop.util.NativeCodeLoader: Loaded the native-hadoop library
+2013-07-26 15:14:24,419 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/com <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/com
+2013-07-26 15:14:24,427 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/job.jar <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/job.jar
+2013-07-26 15:14:24,428 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/.job.jar.crc <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/.job.jar.crc
+2013-07-26 15:14:24,430 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/org <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/org
+2013-07-26 15:14:24,431 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/dk <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/dk
+2013-07-26 15:14:24,433 INFO org.apache.hadoop.filecache.TrackerDistributedCacheManager: Creating symlink: /hdfs/disk3/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/jars/pigContext <- /hdfs/disk5/mapred/taskTracker/adaptive/jobcache/job_201307261207_0221/attempt_201307261207_0221_r_000007_1.cleanup/work/pigContext
+2013-07-26 15:14:24,958 INFO org.apache.hadoop.util.ProcessTree: setsid exited with exit code 0
+2013-07-26 15:14:24,962 INFO org.apache.hadoop.mapred.Task:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@5f9f265c
+2013-07-26 15:14:25,240 INFO org.apache.hadoop.mapred.Task: Runnning cleanup for the task
+2013-07-26 15:14:25,249 INFO org.apache.hadoop.mapred.Task: Task:attempt_201307261207_0221_r_000007_1 is done. And is in the process of commiting
+2013-07-26 15:14:27,799 INFO org.apache.hadoop.mapred.Task: Task 'attempt_201307261207_0221_r_000007_1' done.
+2013-07-26 15:14:27,887 INFO org.apache.hadoop.mapred.TaskLogsTruncater: Initializing logs' truncater with mapRetainSize=-1 and reduceRetainSize=-1
+2013-07-26 15:14:27,980 INFO org.apache.hadoop.io.nativeio.NativeIO: Initialized cache for UID to User mapping with a cache timeout of 14400 seconds.
+2013-07-26 15:14:27,981 INFO org.apache.hadoop.io.nativeio.NativeIO: Got UserName adaptive for UID 500 from the native implementation

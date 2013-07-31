@@ -1,0 +1,5 @@
+{
+	"reportProcessor" : {
+		"logFile" : "logs/report_processor.log"
+	}
+}
