@@ -8,7 +8,10 @@
 		"grep1" : "0.0.x",
 		"jasmine-node" : "1.x.x",
 		"jquery" : "1.x.x",
-		"optimist" : "0.x.x"
+		"optimist" : "0.x.x",
+		"split" : "0.x.x",
+		"through" : "2.x.x",
+		"moment" : "2.x.x"
 	},
 	"repository": {
 		"type": "git",
