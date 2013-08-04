@@ -3,7 +3,7 @@
 		{
 			"type": "file",
 			"level": "WARN",
-			"filename": "parseLogs.log",
+			"filename": "log/parseLogs.log",
 			"maxLogSize": 500000,
 			"backups": 1,
 			"category": ["mainLogger"]

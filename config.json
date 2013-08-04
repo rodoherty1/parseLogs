@@ -1,6 +1,6 @@
 {
 	"reportProcessor" : {
-		"inputLogFilesGlob" : "logs/report_processor.log.*",
+		"inputLogFilesGlob" : "inputFiles/report_processor.log.*",
 		"resultsDir" : "results"
 	}
 }
