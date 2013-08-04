@@ -12,7 +12,9 @@ var async = require('async'),
 		return fs.existsSync(argv.config);
 		}),
 	fs = require('fs'),
-	$ = require('jquery');
+	$ = require('jquery'),
+	log4js = require('log4js');
+
 
 var App = function () {
 	'use strict';
@@ -20,6 +22,9 @@ var App = function () {
 	var that = this;
 	
 	var config = {};
+	
+	var log4jConfFile = 'log4js.json';
+	var logger = log4js.getLogger('mainLogger');
 
     /**
      *  terminator === the termination handler
@@ -28,11 +33,10 @@ var App = function () {
      */
     var terminator = function(sig){
         if (typeof sig === "string") {
-           console.log('%s: Received %s - terminating sample app ...',
-                       Date(Date.now()), sig);
-           process.exit(1);
+			logger.info(Date(Date.now()) + ': Received ' + sig + ' - terminating sample app ...');
+			process.exit(1);
         }
-        console.log('UpdateRss3App stopped.');
+        logger.info('UpdateRss3App stopped.');
     };
     
     
@@ -42,7 +46,7 @@ var App = function () {
     var setupTerminationHandlers = function() {
         //  Process on exit and signals.
         process.on('exit', function() {
-			console.log ('exit event - calling terminator()');
+			logger.info('exit event - calling terminator()');
 			terminator();
 		});
 
@@ -71,6 +75,7 @@ var App = function () {
 	
 	this.initialize = function() {
 		setupTerminationHandlers();
+		log4js.configure(log4jConfFile, {});		
 	};
 
 	var processLogs = function(callback) {
@@ -86,10 +91,10 @@ var App = function () {
 		],
 		function(err, results){
 			if (err) {
-				console.log('Errors encountered - ' + err);
+				logger.warn('Errors encountered - ' + err);
 			}
 			
-			console.log(results);
+			logger.info(results);
 		});
 	};
 	

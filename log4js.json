@@ -1,0 +1,17 @@
+{
+	"appenders": [
+		{
+			"type": "file",
+			"level": "WARN",
+			"filename": "parseLogs.log",
+			"maxLogSize": 500000,
+			"backups": 1,
+			"category": ["mainLogger"]
+		},
+		{
+			"type": "console",
+			"level": "WARN",
+			"category": ["mainLogger"]
+		}
+	]
+}
