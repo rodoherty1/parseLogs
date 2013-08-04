@@ -12,7 +12,8 @@
 		"split" : "0.x.x",
 		"through" : "2.x.x",
 		"moment" : "2.x.x",
-		"log4js" : "0.x.x"
+		"log4js" : "0.x.x",
+		"glob" : "3.x.x"
 	},
 	"repository": {
 		"type": "git",

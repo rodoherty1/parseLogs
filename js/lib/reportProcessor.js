@@ -7,7 +7,9 @@ var grep = require('grep1'),
 	split = require('split'),
 	fs = require('fs'),
 	moment = require('moment'),
-	log4js = require('log4js');
+	log4js = require('log4js'),
+	glob = require('glob');
+	
 
 
 
@@ -26,8 +28,8 @@ var JobExecutions = function () {
 			startTime : startTime,
 			endTime : endTime,
 			runningTime : endTime - startTime,
-			recordsRead : recordsRead,
-			recordsWritten : recordsWritten
+			recordsRead : recordsRead.slice(0),
+			recordsWritten : recordsWritten.slice(0)
 		};		
 		
 		jobExecutions.push(jobExecution);
@@ -46,6 +48,10 @@ var JobExecutions = function () {
 	
 		return totalRunningTime / jobExecutions.length;
 	};
+	
+	this.getJobExecutions = function() {
+		return jobExecutions;
+	};
 };
 
 
@@ -57,6 +63,11 @@ var ReportProcessor = function () {
 	 */
 	var log4jConfFile = 'log4js.json';
 	var logger = log4js.getLogger('mainLogger');
+	
+	/*
+	 *
+	 */
+	var resultsDir = 'results';
 	
 	/*
 	 * Report Processor Results
@@ -237,14 +248,23 @@ var ReportProcessor = function () {
 		};
 		return summary;
 	};
+
+
 	
 	var printJobExecution = function(value, key, list) {
 		logger.info (getJobExecutionSummary(value, key, list));
 	};
+
 	
-	var writeJobExecution = function(value, key, list) {
-		var s = JSON.stringify(getJobExecutionSummary(value, key, list)) + '\n';
-		resultsWriteStream.write(s);
+	var writeJobExecution = function(element, index, list) {
+		resultsWriteStream.write(JSON.stringify(element, null, '\t') + '\n');
+	};
+	
+	
+	var writeJobExecutions = function(value, key, list) {
+		resultsWriteStream.write('\n' + key);
+		
+		_.each(value.getJobExecutions(), writeJobExecution);
 	};
 
 	var printSummary = function() {
@@ -253,44 +273,74 @@ var ReportProcessor = function () {
 	
 	var createNextResultsFilename = function() {
 		moment().format('MMMM Do YYYY, h:mm:ss a');
-		return 'reportProcessorResults_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + '.log';
+		return resultsDir + '/reportProcessorResults_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + '.log';
 	};
 	
 
-	var storeResults = function() {
-		resultsWriteStream = fs.createWriteStream(createNextResultsFilename(), {'flags' : 'w'});
+	var storeResults = function(callback) {
+		var filename = createNextResultsFilename();
+		logger.info('Writing summary to ' + filename);
+		
+		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
 		
 		resultsWriteStream.on('open', function() {
-			_.each(results, writeJobExecution);
+			_.each(results, writeJobExecutions);
 		});
 
 		resultsWriteStream.on('finish', function() {
 			logger.info('all writes are now complete.');
+			callback(null, 'process');
 		});
 	};
 		
-	var grepLogs = function(config) {
-		nextParserStates.push(readUntilStartOfJobExecution);
-		var stream = fs.createReadStream(config.reportProcessor.logFile);
-		var streamSplitByCarriageReturns = stream.pipe(split());
-		var parser = streamSplitByCarriageReturns.pipe(through(parseLine));
 		
-		parser.on('end', function() {
-			logger.info('Finished reading ' + config.reportProcessor.logFile + '!');
-			printSummary();
-			storeResults();
-		});
+	var initialize = function(config) {
+		resultsDir = config.reportProcessor.resultsDir;
 
+		fs.exists(resultsDir, function (exists) {
+			if (!exists) {
+				fs.mkdirSync(resultsDir);
+			}
+		});
 	};
 	
-	exports.process = function(config, callback) {
-		var err = grepLogs(config, callback);
+	
+	var parseLogs = function(config) {
+		nextParserStates.push(readUntilStartOfJobExecution);
 		
-		if (err) {
-			callback(err, 'process');
-		} else {
-			callback(null, 'process');
-		}
+		var inputLogFiles = glob.sync(config.reportProcessor.inputLogFilesGlob);
+		logger.debug(inputLogFiles);
+		
+		(function readNextFile() {
+			(inputLogFiles.length) ? (function () {
+				
+				var nextFile = inputLogFiles.shift();
+				logger.info('Next input log file : ' + nextFile);
+				
+				var stream = fs.createReadStream(nextFile);
+				var streamSplitByCarriageReturns = stream.pipe(split());
+				var parser = streamSplitByCarriageReturns.pipe(through(parseLine));
+			
+				parser.on('end', function() {
+					logger.info('Finished reading ' + nextFile);
+					readNextFile();
+				});
+			})() : storeResults();
+		})();
+	};
+	
+	
+	exports.process = function(config, callback) {
+		initialize(config);
+		
+		/*
+		 * This next call will one day fail because it will be called immediately after initialize() returns which may be before the 
+		 * target directories have been created.  
+		 * 
+		 * Just something to keep in mind.
+		 * Consider using Yield or Async or some home-grown flow-control.
+		 */
+		parseLogs(config, callback);
 	};
 };
 
