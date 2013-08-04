@@ -1,7 +1,13 @@
-parseLogs
-=========
+Parse Logs
+==========
 
-This project is sarting out as a log file parser to help me understand how jobs in my Hadoop cluster are running.
+Overview
+--------
+This project is starting out as a log file parser to help me understand how jobs in my Hadoop cluster are running.
 
-It currently only scans one log file but ultimately it should scan many log files as well as recording database sizes and other stats about the file system following a test of the cluster.
+It currently scans a selection of log files (idenified by a glob filter) and writes out a bit of a long-winded summary of each job that was run.  Currently, the output is so long-winded it isn't particularly useful but I'll change that when I work out exactly what I need of the output.
 
+
+Todo
+----
+* Record database sizes and other stats about the file system
