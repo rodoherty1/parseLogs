@@ -1,6 +1,7 @@
 *.log
 *.log.*
 *.old
+analytics_logs
 node_modules
 log
 inputFiles

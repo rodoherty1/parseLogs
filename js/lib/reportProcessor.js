@@ -25,8 +25,8 @@ var JobExecutions = function () {
 	
 	this.addJobExecution = function(startTime, endTime, recordsRead, recordsWritten) {
 		var jobExecution = {
-			startTime : startTime,
-			endTime : endTime,
+			startTimeInEpoch : startTime,
+			endTimeInEpoch : endTime,
 			runningTime : endTime - startTime,
 			recordsRead : recordsRead.slice(0),
 			recordsWritten : recordsWritten.slice(0)
@@ -78,6 +78,7 @@ var ReportProcessor = function () {
 	var dbTableRecordsWrittenTo=[], startTimeInMS, endTimeInMS, runningTimeInMS, recordsRead=[], recordsWritten=[];
 	
 	var resultsWriteStream;
+	var subtotalRunningTime = 0;
 	
 	/*
 	 * Parser state
@@ -216,13 +217,17 @@ var ReportProcessor = function () {
 		var dateTimeRegex = /(([1-2][0-9][0-9][0-9])-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\s([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9]))+/g;
 		var match = dateTimeRegex.exec(s);
 		startTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
+		if (startTimeInMS > 1375455600) {
+			match = dateTimeRegex.exec(s);
+			endTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
 
-		match = dateTimeRegex.exec(s);
-		endTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
-
-		nextParserStates.length = 0;
-		skipNextLines(1);
-		andThen(confirmSuccessfulJobExecution);
+			nextParserStates.length = 0;
+			skipNextLines(1);
+			andThen(confirmSuccessfulJobExecution);
+		} else {
+			nextParserStates.length = 0;
+			andThen(readUntilStartOfJobExecution);
+		}
 	};
 	
 	var skipLine = function (s) {
@@ -257,12 +262,22 @@ var ReportProcessor = function () {
 
 	
 	var writeJobExecution = function(element, index, list) {
-		resultsWriteStream.write(JSON.stringify(element, null, '\t') + '\n');
+		//resultsWriteStream.write(JSON.stringify(element, null, '\t') + '\n');
+		var s = moment.unix(element.startTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + moment.unix(element.endTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + element.runningTime + ' secs\t' + element.recordsRead + '\t' + element.recordsWritten + '\n';
+
+		subtotalRunningTime += element.runningTime;
+		resultsWriteStream.write(s);
+		if (index == list.length-1) {
+			resultsWriteStream.write('Summary: {Avg Running Time: ' + (subtotalRunningTime/list.length) + ' seconds}\n');
+			subtotalRunningTime = 0;
+		}
 	};
 	
 	
 	var writeJobExecutions = function(value, key, list) {
-		resultsWriteStream.write('\n' + key);
+		resultsWriteStream.write('\n' + key + '\n');
+		resultsWriteStream.write('startTime\t\tendTime\t\t\trunningTimeInSecs\trecordsRead\trecordsWritten\n');
+		resultsWriteStream.write('=========\t\t=======\t\t\t=================\t===========\t==============\n');
 		
 		_.each(value.getJobExecutions(), writeJobExecution);
 	};
