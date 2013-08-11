@@ -49,6 +49,16 @@ var JobExecutions = function () {
 		return totalRunningTime / jobExecutions.length;
 	};
 	
+	this.averageRecordsRead = function () {
+		var totalRecordsRead = 0;
+		
+		for (var i=0; i<jobExecutions.length; i++) {
+			totalRecordsRead += jobExecutions[i].recordsRead;
+		}
+	
+		return totalRecordsRead / jobExecutions.length;
+	};
+	
 	this.getJobExecutions = function() {
 		return jobExecutions;
 	};
@@ -65,9 +75,11 @@ var ReportProcessor = function () {
 	var logger = log4js.getLogger('mainLogger');
 	
 	/*
-	 *
+	 * Input config.json variables
 	 */
-	var resultsDir = 'results';
+	var configResultsDir = 'results';
+	var configStartTimeInMS= 0;
+	var configEndTimeInMS = (new Date()).getTime();
 	
 	/*
 	 * Report Processor Results
@@ -215,12 +227,14 @@ var ReportProcessor = function () {
 	var parseStartAndEndDate = function (s) {
 		logger.debug ('Parsing out Start and End dates from "' + s + '"');
 		var dateTimeRegex = /(([1-2][0-9][0-9][0-9])-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])\s([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9]))+/g;
+		
 		var match = dateTimeRegex.exec(s);
 		startTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
-		if (startTimeInMS > 1375455600) {
-			match = dateTimeRegex.exec(s);
-			endTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
-
+		
+		match = dateTimeRegex.exec(s);
+		endTimeInMS = moment(match[0], 'YYYY-MM-DD HH:mm:ss').unix();
+		
+		if ((startTimeInMS > configStartTimeInMS) && (endTimeInMS < configEndTimeInMS)) {
 			nextParserStates.length = 0;
 			skipNextLines(1);
 			andThen(confirmSuccessfulJobExecution);
@@ -245,11 +259,33 @@ var ReportProcessor = function () {
 	};
 	
 
+	function formatSeconds(seconds) {
+		var secs = seconds % 60;
+		var minutes = Math.floor(seconds / 60);
+		var hours = Math.floor(seconds / (60 * 60));
+		
+		var s = '';
+		if (hours) {
+			s += hours + 'hrs ';
+		}
+		
+		if (hours || minutes) {
+			s += minutes + 'mins ';
+		}
+
+		if (hours || minutes || secs) {
+			s += secs + 'secs';
+		}
+		
+		return s;
+	}
+
 	var getJobExecutionSummary = function(value, key, list) {
 		var summary = {
 			reportName : key,
 			numberOfExecutions : value.countJobExecutions(),
-			averageRunningTime : value.averageRunningTime()
+			averageRunningTime : formatSeconds(value.averageRunningTime()),
+			averageRecordsRead : value.averageRecordsRead()
 		};
 		return summary;
 	};
@@ -282,18 +318,48 @@ var ReportProcessor = function () {
 		_.each(value.getJobExecutions(), writeJobExecution);
 	};
 
+
+	var writeJobExecutionsSummary = function(value, key, list) {
+		resultsWriteStream.write(JSON.stringify(getJobExecutionSummary(value, key, list)));
+	};
+
+
 	var printSummary = function() {
 		_.each(results, printJobExecution);	
 	};
 	
-	var createNextResultsFilename = function() {
+	var createNextResultsFilename = function(fileNamePrefix) {
 		moment().format('MMMM Do YYYY, h:mm:ss a');
-		return resultsDir + '/reportProcessorResults_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + '.log';
+		return configResultsDir + '/' + fileNamePrefix + '_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + '.log';
 	};
 	
-
 	var storeResults = function(callback) {
-		var filename = createNextResultsFilename();
+		var items = [storeReportProcessorDetailedResults, storeReportsProcessorResultsSummary];
+		var results = [];
+		
+		items.forEach(function(item) {
+			storeResultsAsync(item, function(result){
+				results.push(result);
+				if (results.length == items.length) {
+					final(callback);
+				}
+			});
+		});
+	};
+		
+	var storeResultsAsync = function(storeFunction, storedResultsCallback) {
+		storeFunction(storedResultsCallback);
+	};
+	
+	var final = function(callback) {
+		console.log('All results stored', results);
+		callback(null, 'process');
+	};
+
+	
+
+	var storeReportProcessorDetailedResults = function(callback) {
+		var filename = createNextResultsFilename('reportProcessorDetailedResults');
 		logger.info('Writing summary to ' + filename);
 		
 		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
@@ -303,24 +369,44 @@ var ReportProcessor = function () {
 		});
 
 		resultsWriteStream.on('finish', function() {
-			logger.info('all writes are now complete.');
-			callback(null, 'process');
+			logger.info('storeDetailedResults completed.');
+			//callback(null, 'process');
+			callback('storeResultsSummary');
+		});
+	};
+
+	var storeReportsProcessorResultsSummary = function(callback) {
+		var filename = createNextResultsFilename('reportProcessorSummary');
+
+		logger.info('Writing summary to ' + filename);
+		
+		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
+		
+		resultsWriteStream.on('open', function() {
+			_.each(results, writeJobExecutionsSummary);
+		});
+
+		resultsWriteStream.on('finish', function() {
+			callback('storeReportsProcessorResultsSummary');
 		});
 	};
 		
 		
 	var initialize = function(config) {
-		resultsDir = config.reportProcessor.resultsDir;
+		configResultsDir = config.reportProcessor.resultsDir;
 
-		fs.exists(resultsDir, function (exists) {
+		fs.exists(configResultsDir, function (exists) {
 			if (!exists) {
-				fs.mkdirSync(resultsDir);
+				fs.mkdirSync(configResultsDir);
 			}
 		});
+		
+		configStartTimeInMS = moment(config.reportProcessor.startDate, 'YYYY-MM-DD HH:mm:ss').unix();
+		configEndTimeInMS = moment(config.reportProcessor.endDate, 'YYYY-MM-DD HH:mm:ss').unix();
 	};
 	
 	
-	var parseLogs = function(config) {
+	var parseLogs = function(config, callback) {
 		nextParserStates.push(readUntilStartOfJobExecution);
 		
 		var inputLogFiles = glob.sync(config.reportProcessor.inputLogFilesGlob);
@@ -340,7 +426,7 @@ var ReportProcessor = function () {
 					logger.info('Finished reading ' + nextFile);
 					readNextFile();
 				});
-			})() : storeResults();
+			})() : storeResults(callback);
 		})();
 	};
 	

@@ -1,6 +1,8 @@
 {
 	"reportProcessor" : {
-		"inputLogFilesGlob" : "analytics_logs/*",
-		"resultsDir" : "results"
+		"inputLogFilesGlob" : "inputFiles/report_processor.log*",
+		"resultsDir" : "results",
+		"startDate" : "2013-07-26 14:12:18",
+		"endDate" : "2013-07-26 14:22:34"
 	}
 }

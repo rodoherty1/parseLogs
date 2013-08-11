@@ -6,8 +6,12 @@ var async = require('async'),
     .usage('Reads some output files and generates a log.\nUsage: $0 -c [config]')
     .alias('c', 'config')
     .describe('c', 'Config file describing the locations of the input files and directories')
-	.demand(['c']).
-	check(function (argv) {
+    .alias('s', 'startdate')
+    .describe('s', 'Start Date in the form "YYYY-MM-DD HH:mm:ss"')
+    .alias('e', 'enddate')
+    .describe('e', 'End Date in the form "YYYY-MM-DD HH:mm:ss"')
+     .default('c', 'config.json')
+	.check(function (argv) {
 		'use strict';
 		return fs.existsSync(argv.config);
 		}),
