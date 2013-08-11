@@ -298,15 +298,8 @@ var ReportProcessor = function () {
 
 	
 	var writeJobExecution = function(element, index, list) {
-		//resultsWriteStream.write(JSON.stringify(element, null, '\t') + '\n');
-		var s = moment.unix(element.startTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + moment.unix(element.endTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + element.runningTime + ' secs\t' + element.recordsRead + '\t' + element.recordsWritten + '\n';
-
-		subtotalRunningTime += element.runningTime;
+		var s = moment.unix(element.startTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + moment.unix(element.endTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + element.runningTime + ' secs\t\t' + element.recordsRead + '\t' + element.recordsWritten + '\n';
 		resultsWriteStream.write(s);
-		if (index == list.length-1) {
-			resultsWriteStream.write('Summary: {Avg Running Time: ' + (subtotalRunningTime/list.length) + ' seconds}\n');
-			subtotalRunningTime = 0;
-		}
 	};
 	
 	
@@ -320,7 +313,7 @@ var ReportProcessor = function () {
 
 
 	var writeJobExecutionsSummary = function(value, key, list) {
-		resultsWriteStream.write(JSON.stringify(getJobExecutionSummary(value, key, list)));
+		resultsWriteStream.write(JSON.stringify(getJobExecutionSummary(value, key, list)) + '\n');
 	};
 
 
@@ -337,54 +330,41 @@ var ReportProcessor = function () {
 		var items = [storeReportProcessorDetailedResults, storeReportsProcessorResultsSummary];
 		var results = [];
 		
-		items.forEach(function(item) {
-			storeResultsAsync(item, function(result){
-				results.push(result);
-				if (results.length == items.length) {
-					final(callback);
-				}
-			});
-		});
+		(function series(item) {
+			if (item) {
+				item(function(result){
+					results.push(result);
+					return series(items.shift());
+				});
+			} else {
+				callback(null, 'process');
+			}
+		})(items.shift());
 	};
 		
-	var storeResultsAsync = function(storeFunction, storedResultsCallback) {
-		storeFunction(storedResultsCallback);
-	};
-	
-	var final = function(callback) {
-		console.log('All results stored', results);
-		callback(null, 'process');
-	};
-
-	
-
 	var storeReportProcessorDetailedResults = function(callback) {
-		var filename = createNextResultsFilename('reportProcessorDetailedResults');
-		logger.info('Writing summary to ' + filename);
+		var filename = createNextResultsFilename('reportProcessorResults');
+		logger.info('Writing Detailed Results to ' + filename);
 		
 		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
 		
 		resultsWriteStream.on('open', function() {
-			_.each(results, writeJobExecutions);
+			for (var reportName in results) {
+				if (results.hasOwnProperty(reportName)) {
+					writeJobExecutions(results[reportName], reportName, results);
+				}
+			}
+			callback('storeReportProcessorDetailedResults');
 		});
-
-		resultsWriteStream.on('finish', function() {
-			logger.info('storeDetailedResults completed.');
-			//callback(null, 'process');
-			callback('storeResultsSummary');
-		});
+		
 	};
 
 	var storeReportsProcessorResultsSummary = function(callback) {
-		var filename = createNextResultsFilename('reportProcessorSummary');
-
-		logger.info('Writing summary to ' + filename);
+		resultsWriteStream.write('\nReport Processor Summary\n');
+		resultsWriteStream.write('========================\n');
 		
-		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
-		
-		resultsWriteStream.on('open', function() {
-			_.each(results, writeJobExecutionsSummary);
-		});
+		_.each(results, writeJobExecutionsSummary);
+		resultsWriteStream.end('\n');
 
 		resultsWriteStream.on('finish', function() {
 			callback('storeReportsProcessorResultsSummary');
