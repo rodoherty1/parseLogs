@@ -5,7 +5,7 @@
 			"level": "WARN",
 			"filename": "log/parseLogs.log",
 			"maxLogSize": 500000,
-			"backups": 1,
+			"backups": 5,
 			"category": ["mainLogger"]
 		},
 		{

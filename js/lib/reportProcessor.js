@@ -6,6 +6,7 @@ var grep = require('grep1'),
 	through = require('through'),
 	split = require('split'),
 	fs = require('fs'),
+	util = require('util'),
 	moment = require('moment'),
 	log4js = require('log4js'),
 	glob = require('glob');
@@ -261,20 +262,20 @@ var ReportProcessor = function () {
 
 	function formatSeconds(seconds) {
 		var secs = seconds % 60;
-		var minutes = Math.floor(seconds / 60);
-		var hours = Math.floor(seconds / (60 * 60));
+		var minutes = Math.floor(seconds / 60) % 60;
+		var hours = Math.floor(seconds / (60 * 60)) % 60;
 		
 		var s = '';
 		if (hours) {
-			s += hours + 'hrs ';
+			s += hours + 'h ';
 		}
 		
 		if (hours || minutes) {
-			s += minutes + 'mins ';
+			s += minutes + 'm ';
 		}
 
 		if (hours || minutes || secs) {
-			s += secs + 'secs';
+			s += secs + 's';
 		}
 		
 		return s;
@@ -284,7 +285,7 @@ var ReportProcessor = function () {
 		var summary = {
 			reportName : key,
 			numberOfExecutions : value.countJobExecutions(),
-			averageRunningTime : formatSeconds(value.averageRunningTime()),
+			averageRunningTime : formatSeconds(Math.floor(value.averageRunningTime())),
 			averageRecordsRead : value.averageRecordsRead()
 		};
 		return summary;
@@ -296,19 +297,49 @@ var ReportProcessor = function () {
 		logger.info (getJobExecutionSummary(value, key, list));
 	};
 
+	var writeJobExecutionAsCsv = function(element, index, list) {
+		var s = element.runningTime + ',' + element.recordsRead;
+		this.write(s + '\n');
+
+		if (index === list.length-1) {
+			this.end('\n');
+		}
+	};
+	
 	
 	var writeJobExecution = function(element, index, list) {
-		var s = moment.unix(element.startTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + moment.unix(element.endTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + element.runningTime + ' secs\t\t' + element.recordsRead + '\t' + element.recordsWritten + '\n';
+		var s = moment.unix(element.startTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + moment.unix(element.endTimeInEpoch).format('YYYY-MM-DD HH:mm:ss') + '\t' + formatSeconds(element.runningTime) + '\t\t' + element.runningTime + '\t\t' + element.recordsRead + '\t' + element.recordsWritten + '\n';
 		resultsWriteStream.write(s);
 	};
 	
 	
+	var writeJobExecutionsAsCsv = function(value, reportName, cb) {
+		var sortedJobExecutions = _.sortBy(value.getJobExecutions(),
+						function(jobExecution){
+							return jobExecution.startTimeInEpoch;
+						});
+                var filename = createNextResultsFilename(reportName + '_Csv');
+                logger.info('Writing CSV Results to ' + filename);
+
+                var writeStream = fs.createWriteStream(filename, {'flags' : 'w'});
+                writeStream.on('open', function() {
+			_.each(sortedJobExecutions, writeJobExecutionAsCsv, writeStream);
+                });
+
+                writeStream.on('finish', function() {
+			cb();
+                });
+	};
+
 	var writeJobExecutions = function(value, key, list) {
 		resultsWriteStream.write('\n' + key + '\n');
-		resultsWriteStream.write('startTime\t\tendTime\t\t\trunningTimeInSecs\trecordsRead\trecordsWritten\n');
-		resultsWriteStream.write('=========\t\t=======\t\t\t=================\t===========\t==============\n');
-		
-		_.each(value.getJobExecutions(), writeJobExecution);
+		resultsWriteStream.write('startTime\t\tendTime\t\t\trunningTime\trunningTimeInSecs\trecordsRead\trecordsWritten\n');
+		resultsWriteStream.write('=========\t\t=======\t\t\t===========\t=================\t===========\t==============\n');
+		var sortedJobExecutions = _.sortBy(value.getJobExecutions(),
+						function(jobExecution){
+							return jobExecution.startTimeInEpoch;
+						});	
+		_.each(sortedJobExecutions, writeJobExecution);
 	};
 
 
@@ -327,7 +358,7 @@ var ReportProcessor = function () {
 	};
 	
 	var storeResults = function(callback) {
-		var items = [storeReportProcessorDetailedResults, storeReportsProcessorResultsSummary];
+		var items = [storeReportProcessorDetailedResults, storeReportsProcessorResultsSummary, storeResultsAsCsv];
 		var results = [];
 		
 		(function series(item) {
@@ -341,7 +372,22 @@ var ReportProcessor = function () {
 			}
 		})(items.shift());
 	};
-		
+	
+
+	var storeResultsAsCsv = function(callback) {
+		var csvsCompleted = 0;
+
+		for (var reportName in results) {
+			writeJobExecutionsAsCsv(results[reportName], reportName,
+				function () {
+					csvsCompleted += 1;
+                			if (csvsCompleted === results.length) {
+	                			callback('storeResultsAsCsv');
+		                	}
+				});
+		}
+	};
+	
 	var storeReportProcessorDetailedResults = function(callback) {
 		var filename = createNextResultsFilename('reportProcessorResults');
 		logger.info('Writing Detailed Results to ' + filename);
@@ -390,13 +436,13 @@ var ReportProcessor = function () {
 		nextParserStates.push(readUntilStartOfJobExecution);
 		
 		var inputLogFiles = glob.sync(config.reportProcessor.inputLogFilesGlob);
-		logger.debug(inputLogFiles);
 		
 		(function readNextFile() {
 			(inputLogFiles.length) ? (function () {
 				
 				var nextFile = inputLogFiles.shift();
 				logger.info('Next input log file : ' + nextFile);
+				logger.debug(util.inspect(fs.statSync(nextFile)));
 				
 				var stream = fs.createReadStream(nextFile);
 				var streamSplitByCarriageReturns = stream.pipe(split());
