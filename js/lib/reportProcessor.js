@@ -298,7 +298,8 @@ var ReportProcessor = function () {
 	};
 
 	var writeJobExecutionAsCsv = function(element, index, list) {
-		var s = element.runningTime + ',' + element.recordsRead;
+		var secondsPerOneMillionEvents = element.runningTime * (1000000 / element.recordsRead);
+		var s = element.startTimeInEpoch + ',' + element.runningTime + ',' + secondsPerOneMillionEvents.toFixed(2) + ',' + element.recordsRead;
 		this.write(s + '\n');
 
 		if (index === list.length-1) {
@@ -318,11 +319,12 @@ var ReportProcessor = function () {
 						function(jobExecution){
 							return jobExecution.startTimeInEpoch;
 						});
-                var filename = createNextResultsFilename(reportName + '_Csv');
+                var filename = createNextResultsFilename(reportName, '.csv');
                 logger.info('Writing CSV Results to ' + filename);
 
                 var writeStream = fs.createWriteStream(filename, {'flags' : 'w'});
                 writeStream.on('open', function() {
+			writeStream.write('Starting Time,Running Time in Seconds,Seconds Per One Million Events,Records Read\n');
 			_.each(sortedJobExecutions, writeJobExecutionAsCsv, writeStream);
                 });
 
@@ -352,9 +354,9 @@ var ReportProcessor = function () {
 		_.each(results, printJobExecution);	
 	};
 	
-	var createNextResultsFilename = function(fileNamePrefix) {
+	var createNextResultsFilename = function(prefix, suffix) {
 		moment().format('MMMM Do YYYY, h:mm:ss a');
-		return configResultsDir + '/' + fileNamePrefix + '_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + '.log';
+		return configResultsDir + '/' + prefix + '_' + moment().format('YYYY_MM_DD[T]HH:mm:ss') + suffix;
 	};
 	
 	var storeResults = function(callback) {
@@ -389,7 +391,7 @@ var ReportProcessor = function () {
 	};
 	
 	var storeReportProcessorDetailedResults = function(callback) {
-		var filename = createNextResultsFilename('reportProcessorResults');
+		var filename = createNextResultsFilename('reportProcessorResults', '.log');
 		logger.info('Writing Detailed Results to ' + filename);
 		
 		resultsWriteStream = fs.createWriteStream(filename, {'flags' : 'w'});
