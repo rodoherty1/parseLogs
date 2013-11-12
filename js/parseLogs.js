@@ -68,7 +68,7 @@ var App = function () {
 		var lines = '';
 		
 		stream.on('data', function (buf) {
-		    lines += buf;
+			lines += buf;
 		});
 
 		stream.on('end', function () {

@@ -8,6 +8,7 @@ var callback = function (msg1, msg2) {
 
 
 describe('Report Processor Tests', function() {
+	'use strict';
 	it("should respond with hello world", function(done) {
 		expect(reportProcessor.getStartTime(null)).toEqual("hello world");
 	});

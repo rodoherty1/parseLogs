@@ -154,7 +154,7 @@ var ReportProcessor = function () {
 		
 		reportJobExecutions.addJobExecution(startTimeInMS, endTimeInMS, recordsRead, recordsWritten);
 		
-		dbTableRecordsWrittenTo.length = 0, startTimeInMS = {}, endTimeInMS = {}, recordsRead.length = 0, recordsWritten.length = 0;
+		dbTableRecordsWrittenTo.length = 0; startTimeInMS = {}; endTimeInMS = {}; recordsRead.length=0; recordsWritten.length=0;
 	};
 	
 	
@@ -315,22 +315,6 @@ var ReportProcessor = function () {
 	
 	
 	var writeJobExecutionsAsCsv = function(value, reportName, cb) {
-		var sortedJobExecutions = _.sortBy(value.getJobExecutions(),
-						function(jobExecution){
-							return jobExecution.startTimeInEpoch;
-						});
-                var filename = createNextResultsFilename(reportName, '.csv');
-                logger.info('Writing CSV Results to ' + filename);
-
-                var writeStream = fs.createWriteStream(filename, {'flags' : 'w'});
-                writeStream.on('open', function() {
-			writeStream.write('Starting Time,Running Time in Seconds,Seconds Per One Million Events,Records Read\n');
-			_.each(sortedJobExecutions, writeJobExecutionAsCsv, writeStream);
-                });
-
-                writeStream.on('finish', function() {
-			cb();
-                });
 	};
 
 	var writeJobExecutions = function(value, key, list) {
@@ -375,20 +359,53 @@ var ReportProcessor = function () {
 		})(items.shift());
 	};
 	
+	var writeJobExecutionsAsCsv = function(reportNames, callback) {
+		if (reportNames.length) {
+			var reportName = reportNames[0]; 
+			var value = results[reportName];
+			
+			var sortedJobExecutions = _.sortBy(value.getJobExecutions(),
+					function(jobExecution){
+						return jobExecution.startTimeInEpoch;
+					});
 
-	var storeResultsAsCsv = function(callback) {
-		var csvsCompleted = 0;
-
-		for (var reportName in results) {
-			writeJobExecutionsAsCsv(results[reportName], reportName,
-				function () {
-					csvsCompleted += 1;
-                			if (csvsCompleted === results.length) {
-	                			callback('storeResultsAsCsv');
-		                	}
+			var filename = createNextResultsFilename(reportName, '.csv');
+			logger.info('Writing CSV Results to ' + filename);
+		
+			var writeStream = fs.createWriteStream(filename, {'flags' : 'w'});
+			writeStream.on('open', function() {
+				writeStream.write('Starting Time,Running Time in Seconds,Seconds Per One Million Events,Records Read\n');
+				_.each(sortedJobExecutions, writeJobExecutionAsCsv, writeStream);
+			});
+		
+			var remainingReportNames = Array.prototype.slice.call(reportNames, 1);
+			
+			// If there are no more reports to be written to file then call the callback
+			// when this instance of writeStream has finished writing the file.
+			if (!remainingReportNames.length) {
+				writeStream.on('finish', function() {
+					callback('storeResultsAsCsv');
 				});
+			}
+			
+			// Recursively call this method with the remaining elements of reportNames. 
+			writeJobExecutionsAsCsv(remainingReportNames, callback);
 		}
+	};	
+	
+	var storeResultsAsCsv = function(callback) {
+		var reportNames = [];
+		
+		for (var reportName in results) {
+		    if (results.hasOwnProperty(reportName)) {
+		    	reportNames.push(reportName);
+		    }
+		}
+		
+		writeJobExecutionsAsCsv(reportNames, callback);
 	};
+
+		
 	
 	var storeReportProcessorDetailedResults = function(callback) {
 		var filename = createNextResultsFilename('reportProcessorResults', '.log');
@@ -433,16 +450,14 @@ var ReportProcessor = function () {
 		configEndTimeInMS = moment(config.reportProcessor.endDate, 'YYYY-MM-DD HH:mm:ss').unix();
 	};
 	
-	
 	var parseLogs = function(config, callback) {
 		nextParserStates.push(readUntilStartOfJobExecution);
 		
 		var inputLogFiles = glob.sync(config.reportProcessor.inputLogFilesGlob);
 		
-		(function readNextFile() {
-			(inputLogFiles.length) ? (function () {
-				
-				var nextFile = inputLogFiles.shift();
+		(function readNextFile(inputLogFiles) {
+			if (inputLogFiles.length) {
+				var nextFile = inputLogFiles[0];
 				logger.info('Next input log file : ' + nextFile);
 				logger.debug(util.inspect(fs.statSync(nextFile)));
 				
@@ -452,10 +467,13 @@ var ReportProcessor = function () {
 			
 				parser.on('end', function() {
 					logger.info('Finished reading ' + nextFile);
-					readNextFile();
+					var remainingFiles = Array.prototype.slice.call(inputLogFiles, 1);
+					readNextFile(remainingFiles);
 				});
-			})() : storeResults(callback);
-		})();
+			} else {
+				storeResults(callback);
+			}
+		})(inputLogFiles);
 	};
 	
 	
